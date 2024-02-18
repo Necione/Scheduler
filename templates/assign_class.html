@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Assign/Remove Classes</title>
+</head>
+
+<body>
+    <h2>Assign Classes to Student</h2>
+    <form action="/assign_class/{{ student_id }}" method="post">
+        <select name="class_id">
+            {% for cls in classes %}
+            <option value="{{ cls.id }}">{{ cls.name }} ({{ cls.level }})</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Assign Class</button>
+    </form>
+
+    <h2>Remove Assigned Classes</h2>
+    <ul>
+        {% for cls in assigned_classes %}
+        <li>
+            {{ cls.name }} ({{ cls.level }})
+            <form action="/remove_class/{{ student_id }}/{{ cls.id }}" method="post">
+                <button type="submit">Remove</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Schedule Manager</title>
+</head>
+
+<body>
+    <h2>Add Student</h2>
+    <form action="/add_student" method="post">
+        <label for="name">Student Name:</label>
+        <input type="text" id="name" name="name">
+        <button type="submit">Add Student</button>
+    </form>
+    <h2>Students</h2>
+    <ul>
+        {% for student in students %}
+        <li>
+            {{ student.name }}
+            <form action="/remove_student/{{ student.id }}" method="post" style="display: inline;">
+                <button type="submit">Remove</button>
+            </form>
+            <form action="/assign_class/{{ student.id }}" method="get" style="display: inline;">
+                <button type="submit">Assign Classes</button>
+            </form>
+            <ul>
+                {% for class in student.classes %}
+                <li>{{ class.name }} ({{ class.level }})</li>
+                {% endfor %}
+            </ul>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+
+</html>
